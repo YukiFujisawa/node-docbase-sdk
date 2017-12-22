@@ -1,6 +1,6 @@
 {
   "name": "node-docbase-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "node-docbase-sdk",
   "main": "lib/index.js",
   "scripts": {
