@@ -17,7 +17,7 @@
     "docbase"
   ],
   "author": "YukiFujisawa",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/YukiFujisawa/node-docbase-sdk/issues"
   },
