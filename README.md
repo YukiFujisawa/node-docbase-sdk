@@ -1,4 +1,8 @@
-# サンプルコード
+# node-docbase-sdk
+
+[![Dependency Status](https://beta.gemnasium.com/badges/github.com/YukiFujisawa/node-docbase-sdk.svg)](https://beta.gemnasium.com/projects/github.com/YukiFujisawa/node-docbase-sdk)
+
+## サンプルコード
 
 ```typescript
 import { DocBase } from './DocBase';
