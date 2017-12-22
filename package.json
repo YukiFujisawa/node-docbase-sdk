@@ -1,0 +1,39 @@
+{
+  "name": "node-docbase-sdk",
+  "version": "1.0.0",
+  "description": "node-docbase-sdk",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "tslint 'src/**/*.ts'",
+    "compile": "del-cli lib/* && tsc -p . && npm run lint",
+    "start": "del-cli lib/* && tsc -p . && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YukiFujisawa/node-docbase-sdk.git"
+  },
+  "keywords": [
+    "node",
+    "docbase"
+  ],
+  "author": "YukiFujisawa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YukiFujisawa/node-docbase-sdk/issues"
+  },
+  "dependencies": {
+    "@types/request": "^0.0.45",
+    "@types/request-promise": "4.1.38",
+    "@types/bluebird": "3.5.12",
+    "moment": "^2.19.0",
+    "typescript": "^2.6.2",
+    "del-cli": "^1.1.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.3.0"
+  },
+  "homepage": "https://github.com/YukiFujisawa/node-docbase-sdk#readme"
+}
