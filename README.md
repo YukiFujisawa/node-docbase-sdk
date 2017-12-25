@@ -7,7 +7,7 @@
 node-docbase-sdk is a library for DocBase (https://docbase.io/) API of information sharing service.
 It is compatible with TypeScript and is a library for developers who want to implement with TypeScript.
 
-node-docbase-sdkは、情報共有サービスのDocBase(https://docbase.io/)API用のライブラリです。
+node-docbase-sdkは、情報共有サービスのDocBase (https://docbase.io/) API用のライブラリです。
 TypeScriptに対応しており、TypeScriptで実装したい開発者向けのライブラリとなっています。
 
 ## Installation
