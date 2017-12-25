@@ -2,7 +2,11 @@
 
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/YukiFujisawa/node-docbase-sdk.svg)](https://beta.gemnasium.com/projects/github.com/YukiFujisawa/node-docbase-sdk)
 
-## サンプルコード
+## Sample Project
+
+https://github.com/YukiFujisawa/node-docbase-sdk-sample
+
+## Sample Code
 
 ```typescript
 import { DocBase } from 'node-docbase-sdk/lib/DocBase';
