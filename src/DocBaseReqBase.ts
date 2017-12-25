@@ -4,6 +4,5 @@ export namespace DocBaseReqBaseFields {
 }
 
 export interface DocBaseReqBase {
-  apiToken: DocBaseReqBaseFields.apiToken;
   team: DocBaseReqBaseFields.team;
 }

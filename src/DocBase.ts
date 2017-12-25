@@ -74,7 +74,7 @@ export class DocBase {
         method: reqMethod,
         uri: reqUrl,
         headers: {
-          'X-DocBaseToken': req.apiToken,
+          'X-DocBaseToken': this.apiToken,
           'content-type': 'application/json',
         },
         body: content,

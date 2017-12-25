@@ -3,6 +3,5 @@ export declare namespace DocBaseReqBaseFields {
     type team = string;
 }
 export interface DocBaseReqBase {
-    apiToken: DocBaseReqBaseFields.apiToken;
     team: DocBaseReqBaseFields.team;
 }
