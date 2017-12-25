@@ -5,10 +5,10 @@
 ## サンプルコード
 
 ```typescript
-import { DocBase } from './DocBase';
-import { DocBaseResponse } from './DocBaseResponse';
-import { DocBaseReqReadPosts } from './DocBaseReqReadPosts';
-import { DocBaseReqCreatePost } from './DocBaseReqCreatePost';
+import { DocBase } from 'node-docbase-sdk/lib/DocBase';
+import { DocBaseReqCreatePost } from 'node-docbase-sdk/lib/DocBaseReqCreatePost';
+import { DocBaseReqReadPosts } from 'node-docbase-sdk/lib/DocBaseReqReadPosts';
+import { DocBaseResponse } from 'node-docbase-sdk/lib/DocBaseResponse';
 
 const API_TOKEN = 'API_TOKEN';
 const docBase: DocBase = new DocBase(API_TOKEN);
