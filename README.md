@@ -38,7 +38,7 @@ docBase.readPosts(reqReadPost).then((reponse: DocBaseResponse) => {
   console.log(reponse);
 });
 
-//メモの投稿API
+// メモの投稿API
 // @see https://help.docbase.io/posts/92980
 const postReqCreate: DocBaseReqCreatePost = <DocBaseReqCreatePost>{};
 postReqCreate.team = TEAM_NAME;
