@@ -1,7 +1,7 @@
 {
   "name": "node-docbase-sdk",
   "version": "0.0.8",
-  "description": "node-docbase-sdk",
+  "description": "DocBase(https://docbase.io/) Api Library for TypeScript.",
   "main": "lib/index.js",
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
