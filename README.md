@@ -35,7 +35,7 @@ import { DocBaseReqUpdatePost } from 'node-docbase-sdk/lib/DocBaseReqUpdatePost'
 // Get DocBaseAPI Token from cli.
 // ex.
 //   $ DOC_BASE_API_TOKEN=<DOC_BASE_API_TOKEN> node .
-const DOC_BASE_API_TOKEN = 'DOC_BASE_API_TOKEN';
+const DOC_BASE_API_TOKEN = process.env.DOC_BASE_API_TOKEN;
 const TEAM_NAME = 'TEAM_NAME';
 const KEYWORD = 'DOCBASE_API_TEST';
 
