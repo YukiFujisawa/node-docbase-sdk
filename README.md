@@ -23,14 +23,14 @@ https://github.com/YukiFujisawa/node-docbase-sdk-sample
 ## Sample Code For TypeScript
 
 ```typescript
-import { DocBase } from './DocBase';
-import { DocBaseReqReadPosts } from './DocBaseReqReadPosts';
-import { DocBaseResponse } from './DocBaseResponse';
-import { DocBaseReqCreatePost } from './DocBaseReqCreatePost';
-import { DocBaseReqReadPost } from './DocBaseReqReadPost';
-import { HttpStatus } from './enums/HttpStatus';
-import { DocBaseReqDeletePost } from './DocBaseReqDeletePost';
-import { DocBaseReqUpdatePost } from './DocBaseReqUpdatePost';
+import { DocBase } from 'node-docbase-sdk/lib/DocBase';
+import { DocBaseReqReadPosts } from 'node-docbase-sdk/lib/DocBaseReqReadPosts';
+import { DocBaseResponse } from 'node-docbase-sdk/lib/DocBaseResponse';
+import { DocBaseReqCreatePost } from 'node-docbase-sdk/lib/DocBaseReqCreatePost';
+import { DocBaseReqReadPost } from 'node-docbase-sdk/lib/DocBaseReqReadPost';
+import { HttpStatus } from 'node-docbase-sdk/lib/enums/HttpStatus';
+import { DocBaseReqDeletePost } from 'node-docbase-sdk/lib/DocBaseReqDeletePost';
+import { DocBaseReqUpdatePost } from 'node-docbase-sdk/lib/DocBaseReqUpdatePost';
 
 // Get DocBaseAPI Token from cli.
 // ex.
