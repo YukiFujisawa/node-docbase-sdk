@@ -6,6 +6,9 @@ import { HttpStatus } from './enums/HttpStatus';
 import { HttpStatusCodes } from './enums/HttpStatusCodes';
 import { DocBaseReqReadPosts } from './DocBaseReqReadPosts';
 import { DocBaseReqCreatePost } from './DocBaseReqCreatePost';
+import { DocBaseReqUpdatePost } from './DocBaseReqUpdatePost';
+import { DocBaseReqDeletePost } from './DocBaseReqDeletePost';
+import { DocBaseReqReadPost } from './DocBaseReqReadPost';
 
 export class DocBase {
   apiToken: string;
@@ -16,8 +19,22 @@ export class DocBase {
     this.apiToken = apiToken;
   }
 
+
   /**
-   * 指定したドメインのチームのメモを検索し、メモの一覧を取得します。
+   * Post read API / メモ検索API
+   * @param {DocBaseReqReadPosts} req
+   * @returns {Promise<DocBaseResponse>}
+   */
+  async readPost(req: DocBaseReqReadPost): Promise<DocBaseResponse> {
+    const apiName = 'posts';
+    const reqUrl: string = this.getApiUrl(req, apiName, [String(req.id)]);
+    return await this.sendRequest(req, RequestMethods.GET, reqUrl);
+  }
+
+  /**
+   * Multiple posts read API / 複数メモ検索API
+   *
+   * If you specify req.id, you will get details.
    * req.idを指定した場合は、そのメモ詳細を取得します。
    *
    * @param {DocBaseReqPosts} req
@@ -26,12 +43,6 @@ export class DocBase {
    */
   async readPosts(req: DocBaseReqReadPosts): Promise<DocBaseResponse> {
     const apiName = 'posts';
-
-    // メモの詳細取得
-    if (req.id) {
-      const reqUrl: string = this.getApiUrl(req, apiName, [String(req.id)]);
-      return await this.sendRequest(req, RequestMethods.GET, reqUrl);
-    }
 
     if (!req.q) {
       req.q = '*';
@@ -47,6 +58,12 @@ export class DocBase {
     return await this.sendRequest(req, RequestMethods.GET, reqUrl);
   }
 
+  /**
+   * Post create API / メモ作成API
+   * @param {DocBaseReqCreatePost} req
+   * @returns {Promise<DocBaseResponse>}
+   * @see https://help.docbase.io/posts/92980
+   */
   async createPost(req: DocBaseReqCreatePost): Promise<DocBaseResponse> {
     const apiName = 'posts';
 
@@ -66,7 +83,53 @@ export class DocBase {
     return await this.sendRequest(req, RequestMethods.POST, reqUrl, req);
   }
 
-  private async sendRequest(req: DocBaseReqBase, reqMethod: RequestMethods, reqUrl: string, content: any = {}) {
+
+  /**
+   * Post update API / メモ更新API
+   * @param {DocBaseReqUpdatePost} req
+   * @returns {Promise<DocBaseResponse>}
+   * @see https://help.docbase.io/posts/92981
+   */
+  async updatePost(req: DocBaseReqUpdatePost): Promise<DocBaseResponse> {
+    const apiName = 'posts';
+
+    if (!req.title || !req.body) {
+      throw new Error('Title or Body is null.');
+    }
+    if (!req.draft) {
+      req.draft = false;
+    }
+    if (!req.notice) {
+      req.notice = true;
+    }
+    if (!req.scope) {
+      req.scope = 'everyone';
+    }
+    const reqUrl: string = this.getApiUrl(req, apiName, [String(req.id)]);
+    return await this.sendRequest(req, RequestMethods.PATCH, reqUrl, req);
+  }
+
+  /**
+   * Delete post API / メモの削除API
+   * @param {DocBaseReqDeletePost} req
+   * @returns {Promise<DocBaseResponse>}
+   * @see https://help.docbase.io/posts/92982
+   */
+  async deletePost(req: DocBaseReqDeletePost): Promise<DocBaseResponse> {
+    const apiName = 'posts';
+    const reqUrl: string = this.getApiUrl(req, apiName, [String(req.id)]);
+    return await this.sendRequest(req, RequestMethods.DELETE, reqUrl, req);
+  }
+
+  /**
+   * Send request.
+   * @param {DocBaseReqBase} req
+   * @param {RequestMethods} reqMethod
+   * @param {string} reqUrl
+   * @param content
+   * @returns {Promise<DocBaseResponse>}
+   */
+  private async sendRequest(req: DocBaseReqBase, reqMethod: RequestMethods, reqUrl: string, content: any = '') {
     const apiRes: DocBaseResponse = <DocBaseResponse>{};
     let options: any = {};
     try {
@@ -77,11 +140,13 @@ export class DocBase {
           'X-DocBaseToken': this.apiToken,
           'content-type': 'application/json',
         },
-        body: content,
         rejectUnauthorized: false,
         timeout: this.apiTimeout,
         json: true,
       };
+      if (content) {
+        options['body'] = content;
+      }
     } catch (error) {
       throw error;
     }
@@ -100,6 +165,13 @@ export class DocBase {
     return apiRes;
   }
 
+  /**
+   * Get docBase API URL
+   * @param {DocBaseReqBase} req
+   * @param {string} apiName
+   * @param {string[]} options
+   * @returns {string}
+   */
   private getApiUrl(req: DocBaseReqBase, apiName: string, options: string[] = []) {
     let url: string = `${this.dockBaseUrl}/teams/${req.team}/${apiName}`;
     if (options.length === 0) {

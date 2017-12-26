@@ -1,5 +1,6 @@
+import { HttpStatus } from './enums/HttpStatus';
 export declare namespace DocBaseResponseFields {
-    type status = string;
+    type status = HttpStatus;
     type statusCode = number;
     type options = any;
     type body = any;

@@ -7,5 +7,13 @@ export enum RequestMethods {
    *  POST
    */
   POST = 'POST',
+  /**
+   * PATCH
+   */
+  PATCH = 'PATCH',
+  /**
+   * DELETE
+   */
+  DELETE = 'DELETE',
 }
 
