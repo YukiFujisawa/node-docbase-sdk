@@ -91,7 +91,7 @@ https://help.docbase.io/posts/92982
 
 ```typescript
   const id = 1;
-  const reponse: DocBaseResponse = await docBase.deletePost(id);
+  const reponse: DocBaseResponse = await docBase.memos.delete(id);
 ```
 
 ## Sample Code For TypeScript / サンプルコード
