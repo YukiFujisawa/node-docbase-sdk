@@ -46,7 +46,7 @@ export class Memos implements IResources<Memo> {
       entity.scope = DisclosureScopes.EVERYONE;
     }
     const uri: string = this.baseUri + `/${entity.id}`;
-    return await this.sendRequest(RequestMethods.PATCH, uri);
+    return await this.sendRequest(RequestMethods.PATCH, uri, {}, entity);
   }
 
   async create(entity: Memo): Promise<DocBaseResponse> {
