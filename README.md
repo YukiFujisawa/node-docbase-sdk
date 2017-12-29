@@ -193,7 +193,7 @@ async function deletePost(postId: number) {
   console.log('== START deletePost ==');
   const entity: DocBaseEntity = <DocBaseEntity>{};
   entity.id = postId;
-  const reponse: DocBaseResponse = await docBase.deletePost(entity);
+  const reponse: DocBaseResponse = await docBase.memos.delete(entity.id);
   console.log(`=== Reponse: deletePost===`);
   console.log(reponse);
   console.log(`======`);
