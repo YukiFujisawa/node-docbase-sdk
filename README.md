@@ -20,7 +20,81 @@ $ npm install node-docbase-sdk --save
 
 https://github.com/YukiFujisawa/node-docbase-sdk-sample
 
-## Sample Code For TypeScript
+## Usage with TypeScript
+
+### API Client
+
+Your app will interact with the Web API through the `DocBase` object, 
+which a top level export from this package. 
+
+```typescript
+// An access token
+const DOC_BASE_API_TOKEN = process.env.DOC_BASE_API_TOKEN;
+const TEAM_NAME = 'TEAM_NAME';
+
+const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
+```
+
+### Memo conditional search / メモ条件検索
+
+https://help.docbase.io/posts/92984
+
+```typescript
+  const condition: MemoCondition = <MemoCondition>{};
+  condition.q = 'query';
+  condition.page = 1;
+  condition.perPage = 20;
+  const reponse: DocBaseResponse = await docBase.memos.where(condition);
+```
+
+### Memo detail / メモ詳細
+
+https://help.docbase.io/posts/97204
+
+```typescript
+  const id = 1;
+  const reponse: DocBaseResponse = await docBase.memos.find(id);
+```
+
+### Memo create / メモ投稿
+
+https://help.docbase.io/posts/92980
+
+```typescript
+  const memo: Memo = <Memo>{};
+  memo.title = 'title';
+  memo.body = 'title';
+  memo.draft = false;
+  memo.notice = false;
+  memo.scope = DisclosureScopes.PRIVATE;
+  const reponse: DocBaseResponse = await docBase.memos.create(memo);
+```
+
+### Memo update / メモ更新
+
+https://help.docbase.io/posts/92981
+
+```typescript
+  const memo: Memo = <Memo>{};
+  memo.id = 1;
+  memo.title = 'title';
+  memo.body = 'body';
+  memo.draft = false;
+  memo.notice = false;
+  memo.scope = DisclosureScopes.PRIVATE;
+  const reponse: DocBaseResponse = await docBase.memos.update(memo);
+```
+
+### Memo delete / メモ削除
+
+https://help.docbase.io/posts/92982
+
+```typescript
+  const id = 1;
+  const reponse: DocBaseResponse = await docBase.deletePost(id);
+```
+
+## Sample Code For TypeScript / サンプルコード
 
 ```typescript
 import { DocBase } from 'node-docbase-sdk/lib/DocBase';
