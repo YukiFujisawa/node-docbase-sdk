@@ -44,7 +44,7 @@ https://help.docbase.io/posts/92984
   condition.q = 'query';
   condition.page = 1;
   condition.perPage = 20;
-  const reponse: DocBaseResponse = await docBase.memos.where(condition);
+  const reponse: DocBaseResponse = await docBase.memos.list(condition);
 ```
 
 ### Memo detail / メモ詳細
@@ -99,7 +99,7 @@ https://help.docbase.io/posts/92982
 https://help.docbase.io/posts/92977
 
 ```typescript
-  const reponse: DocBaseResponse = await docBase.teams.where();
+  const reponse: DocBaseResponse = await docBase.teams.list();
 ```
 
 ## Sample Code For TypeScript / サンプルコード
