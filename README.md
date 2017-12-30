@@ -94,15 +94,23 @@ https://help.docbase.io/posts/92982
   const reponse: DocBaseResponse = await docBase.memos.delete(id);
 ```
 
+### My team get / 所属チーム取得
+
+https://help.docbase.io/posts/92977
+
+```typescript
+  const reponse: DocBaseResponse = await docBase.teams.where();
+```
+
 ## Sample Code For TypeScript / サンプルコード
 
 ```typescript
 import { DocBase } from 'node-docbase-sdk/lib/DocBase';
-import { Memo } from 'node-docbase-sdk/lib/entities/Memo';
-import { DisclosureScopes } from 'node-docbase-sdk/lib/enums/DisclosureScopes';
 import { DocBaseResponse } from 'node-docbase-sdk/lib/DocBaseResponse';
 import { HttpStatus } from 'node-docbase-sdk/lib/enums/HttpStatus';
 import { MemoCondition } from 'node-docbase-sdk/lib/conditions/MemoCondition';
+import { Memo } from 'node-docbase-sdk/lib/entities/Memo';
+import { DisclosureScopes } from 'node-docbase-sdk/lib/enums/DisclosureScopes';
 
 // Get DocBaseAPI Token from cli.
 // ex.
@@ -112,6 +120,20 @@ const TEAM_NAME = 'TEAM_NAME';
 const KEYWORD = 'DOCBASE_API_TEST';
 
 const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
+
+// 所属チーム取得API
+// @see https://help.docbase.io/posts/92977
+async function getMyTeams() {
+  console.log('== START getMyTeams ==');
+  const reponse: DocBaseResponse = await docBase.teams.where();
+  console.log(`=== Reponse: getMyTeams===`);
+  console.log(reponse);
+  console.log(`======`);
+  if (reponse.status === HttpStatus.OK) {
+    return reponse.body;
+  }
+  throw new Error(reponse.body);
+}
 
 // メモ投稿API
 // @see https://help.docbase.io/posts/92980
@@ -130,13 +152,13 @@ async function createMemo() {
   if (reponse.status === HttpStatus.OK) {
     return reponse.body;
   }
-  throw Error(reponse.body);
+  throw new Error(reponse.body);
 }
 
 // メモ更新API
 // @see https://help.docbase.io/posts/92981
-async function updateMemos(memoId: number) {
-  console.log('== START updateMemos ==');
+async function updateMemo(memoId: number) {
+  console.log('== START updateMemo ==');
   const memo: Memo = <Memo>{};
   memo.id = memoId;
   memo.title = KEYWORD + '_updated';
@@ -145,13 +167,13 @@ async function updateMemos(memoId: number) {
   memo.notice = false;
   memo.scope = DisclosureScopes.PRIVATE;
   const reponse: DocBaseResponse = await docBase.memos.update(memo);
-  console.log(`=== Reponse: updateMemos===`);
+  console.log(`=== Reponse: updateMemo===`);
   console.log(reponse);
   console.log(`======`);
   if (reponse.status === HttpStatus.OK) {
     return reponse.body;
   }
-  throw Error(reponse.body);
+  throw new Error(reponse.body);
 }
 
 // メモ詳細取得API
@@ -165,7 +187,7 @@ async function findMemo(memoId: number) {
   if (reponse.status === HttpStatus.OK) {
     return reponse.body;
   }
-  throw Error(reponse.body);
+  throw new Error(reponse.body);
 }
 
 // 複数メモ取得API
@@ -183,7 +205,7 @@ async function searchMemos(keyword: string) {
   if (reponse.status === HttpStatus.OK) {
     return reponse.body;
   }
-  throw Error(reponse.body);
+  throw new Error(reponse.body);
 }
 
 // メモ削除API
@@ -197,22 +219,32 @@ async function deleteMemo(memoId: number) {
   if (reponse.status === HttpStatus.OK) {
     return reponse.body;
   }
-  throw Error(reponse.body);
+  throw new Error(reponse.body);
 }
 
 async function main() {
-  let resBody = await createMemo();
-  resBody = await updateMemos(Number(resBody.id));
-  resBody = await findMemo(Number(resBody.id));
-  resBody = await searchMemos(String(resBody.title));
-  for (const post of resBody.posts) {
-    console.log(JSON.stringify(post));
-    // await deleteMemo(post.id);
+  try {
+    let resBody = await getMyTeams();
+    resBody = await createMemo();
+    resBody = await updateMemo(Number(resBody.id));
+    resBody = await findMemo(Number(resBody.id));
+    resBody = await searchMemos(String(resBody.title));
+    for (const post of resBody.posts) {
+      if (post.title === 'DOCBASE_API_TEST_updated') {
+        console.log(JSON.stringify(post));
+        await deleteMemo(post.id);
+      } else {
+        throw new Error(JSON.stringify(post));
+      }
+    }
+  } catch (error) {
+    throw error;
   }
 }
 
 // == Main ==
-main();
+main().catch((error) => {
+  console.log(error);
+});
 // ====
-
 ```
