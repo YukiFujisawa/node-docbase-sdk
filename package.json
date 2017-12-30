@@ -1,6 +1,6 @@
 {
   "name": "node-docbase-sdk",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "DocBase(https://docbase.io/) Api Library for TypeScript.",
   "main": "lib/index.js",
   "scripts": {
