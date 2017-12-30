@@ -1,4 +1,5 @@
 import { Memos } from './resources/Memos';
+import { Teams } from './resources/Teams';
 
 export class DocBase {
 
@@ -6,6 +7,10 @@ export class DocBase {
   }
 
   get memos(): Memos {
-    return new Memos(this.team, this.apiToken);
+    return new Memos(this.apiToken, this.team);
+  }
+
+  get teams(): Teams {
+    return new Teams(this.apiToken);
   }
 }

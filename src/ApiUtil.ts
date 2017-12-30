@@ -29,8 +29,6 @@ export class ApiUtil {
       paramStr += `${key}=${params[key]}`;
     }
 
-    console.log('apiUri::' + apiUri);
-
     url = DOCBASE_API_URL + apiUri;
     if (paramStr) {
       url += '?' + paramStr;

@@ -1,37 +1,21 @@
-import { IResources } from './IResources';
 import { DocBaseResponse } from '../DocBaseResponse';
-import { RequestMethods } from '../enums/RequestMethods';
-import { ApiUtil } from '../ApiUtil';
 import { Memo } from '../entities/Memo';
 import { DisclosureScopes } from '../enums/DisclosureScopes';
+import { ResourcesBase } from './ResourcesBase';
 
-export class Memos implements IResources<Memo> {
+export class Memos extends ResourcesBase<Memo> {
 
-  private baseUri: string;
-
-  constructor(private team: string, private apiToken: string) {
+  constructor(apiToken: string, team: string) {
+    super(apiToken, team);
     this.baseUri = `/teams/${team}/posts`;
   }
 
-  async find(id: number): Promise<DocBaseResponse> {
-    const uri: string = this.baseUri + `/${id}`;
-    return await this.sendRequest(RequestMethods.GET, uri);
-  }
-
-  async where(condition: any): Promise<DocBaseResponse> {
-    const cond: any = condition;
-    if (!cond.q) {
-      cond.q = '*';
-    }
-    if (!cond.page) {
-      cond.page = 1;
-    }
-    if (!cond.perPage) {
-      cond.perPage = 20;
-    }
-    return await this.sendRequest(RequestMethods.GET, this.baseUri, cond);
-  }
-
+  /**
+   * Update
+   * @param {Memo} entity
+   * @returns {Promise<DocBaseResponse>}
+   * @override
+   */
   async update(entity: Memo): Promise<DocBaseResponse> {
     if (!entity.title || !entity.body) {
       throw new Error('Title or Body is null.');
@@ -45,10 +29,15 @@ export class Memos implements IResources<Memo> {
     if (!entity.scope) {
       entity.scope = DisclosureScopes.EVERYONE;
     }
-    const uri: string = this.baseUri + `/${entity.id}`;
-    return await this.sendRequest(RequestMethods.PATCH, uri, {}, entity);
+    return await super.update(entity);
   }
 
+  /**
+   * Create
+   * @param {Memo} entity
+   * @returns {Promise<DocBaseResponse>}
+   * @override
+   */
   async create(entity: Memo): Promise<DocBaseResponse> {
     if (!entity.title || !entity.body) {
       throw new Error('Title or Body is null.');
@@ -62,21 +51,6 @@ export class Memos implements IResources<Memo> {
     if (!entity.scope) {
       entity.scope = DisclosureScopes.EVERYONE;
     }
-    return await this.sendRequest(RequestMethods.POST, this.baseUri, {}, entity);
-  }
-
-  async delete(id: number): Promise<DocBaseResponse> {
-    const uri: string = this.baseUri + `/${id}`;
-    return await this.sendRequest(RequestMethods.DELETE, uri);
-  }
-
-  async getApiUrl(apiUri: string, params: any = {}): Promise<string> {
-    return ApiUtil.getApiUrl(apiUri, params);
-  }
-
-  async sendRequest(reqMethod: RequestMethods,
-                    apiUri: string, params: any = {}, entity: Memo = <Memo>{}): Promise<DocBaseResponse> {
-    const reqUrl = await this.getApiUrl(apiUri, params);
-    return await ApiUtil.sendRequest(this.apiToken, reqMethod, reqUrl, entity);
+    return await super.create(entity);
   }
 }

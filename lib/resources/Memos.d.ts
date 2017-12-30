@@ -1,17 +1,20 @@
-import { IResources } from './IResources';
 import { DocBaseResponse } from '../DocBaseResponse';
-import { RequestMethods } from '../enums/RequestMethods';
 import { Memo } from '../entities/Memo';
-export declare class Memos implements IResources<Memo> {
-    private team;
-    private apiToken;
-    private baseUri;
-    constructor(team: string, apiToken: string);
-    find(id: number): Promise<DocBaseResponse>;
-    where(condition: any): Promise<DocBaseResponse>;
+import { ResourcesBase } from './ResourcesBase';
+export declare class Memos extends ResourcesBase<Memo> {
+    constructor(apiToken: string, team: string);
+    /**
+     * Update
+     * @param {Memo} entity
+     * @returns {Promise<DocBaseResponse>}
+     * @override
+     */
     update(entity: Memo): Promise<DocBaseResponse>;
+    /**
+     * Create
+     * @param {Memo} entity
+     * @returns {Promise<DocBaseResponse>}
+     * @override
+     */
     create(entity: Memo): Promise<DocBaseResponse>;
-    delete(id: number): Promise<DocBaseResponse>;
-    getApiUrl(apiUri: string, params?: any): Promise<string>;
-    sendRequest(reqMethod: RequestMethods, apiUri: string, params?: any, entity?: Memo): Promise<DocBaseResponse>;
 }
