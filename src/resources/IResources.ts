@@ -15,7 +15,7 @@ export interface IResources<ENTITY> {
    * @param condition
    * @returns {Promise<DocBaseResponse>}
    */
-  where(condition: any): Promise<DocBaseResponse>;
+  list(condition: any): Promise<DocBaseResponse>;
 
   /**
    * Update / 更新

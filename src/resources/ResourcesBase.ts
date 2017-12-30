@@ -31,7 +31,7 @@ export class ResourcesBase<ENTITY> implements IResources<ENTITY> {
     return await this.sendRequest(RequestMethods.GET, uri);
   }
 
-  async where(condition: any = null): Promise<DocBaseResponse> {
+  async list(condition: any = null): Promise<DocBaseResponse> {
     return await this.sendRequest(RequestMethods.GET, this.baseUri, condition);
   }
 

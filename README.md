@@ -125,7 +125,7 @@ const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
 // @see https://help.docbase.io/posts/92977
 async function getMyTeams() {
   console.log('== START getMyTeams ==');
-  const reponse: DocBaseResponse = await docBase.teams.where();
+  const reponse: DocBaseResponse = await docBase.teams.list();
   console.log(`=== Reponse: getMyTeams===`);
   console.log(reponse);
   console.log(`======`);
@@ -198,7 +198,7 @@ async function searchMemos(keyword: string) {
   condition.q = keyword;
   condition.page = 1;
   condition.perPage = 20;
-  const reponse: DocBaseResponse = await docBase.memos.where(condition);
+  const reponse: DocBaseResponse = await docBase.memos.list(condition);
   console.log(`=== Reponse: searchMemos===`);
   console.log(reponse);
   console.log(`======`);

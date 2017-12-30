@@ -10,7 +10,7 @@ export declare class ResourcesBase<ENTITY> implements IResources<ENTITY> {
     baseUri: string;
     readonly apiToken: string;
     find(id: number): Promise<DocBaseResponse>;
-    where(condition?: any): Promise<DocBaseResponse>;
+    list(condition?: any): Promise<DocBaseResponse>;
     update(entity: ENTITY): Promise<DocBaseResponse>;
     create(entity: ENTITY): Promise<DocBaseResponse>;
     delete(id: number): Promise<DocBaseResponse>;
