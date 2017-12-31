@@ -177,7 +177,7 @@ async function postComment(memoId: number) {
   console.log('== START postComment ==');
   const entity: Comment = <Comment>{};
   entity.memo_id = memoId;
-  entity.body = COMMENT;
+  entity.body = 'DOCBASE_API_TEST_COMMENT';
   entity.notice = false;
   const response: DocBaseResponse = await docBase.comments(memoId).create(entity);
   console.log(`=== response: postComment===`);
