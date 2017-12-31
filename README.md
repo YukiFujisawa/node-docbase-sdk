@@ -102,6 +102,39 @@ https://help.docbase.io/posts/92977
   const reponse: DocBaseResponse = await docBase.teams.list();
 ```
 
+### Comment post / コメント投稿
+
+https://help.docbase.io/posts/216289
+
+```typescript
+  const memoId = 1;
+  const entity: Comment = <Comment>{};
+  entity.memo_id = memoId;
+  entity.body = 'COMMENT';
+  entity.notice = false;
+  const response: DocBaseResponse = await docBase.comments(memoId).create(entity);
+```
+
+### Comment delete / コメント削除
+
+https://help.docbase.io/posts/216290
+
+```typescript
+  const id = 1;
+  const memoId = 1;
+  const response: DocBaseResponse = await docBase.comments(memoId).delete(id);
+```
+
+### Get groups / グループ取得
+
+https://help.docbase.io/posts/92978
+
+```typescript
+  const id = 1;
+  const memoId = 1;
+  const response: DocBaseResponse = await docBase.groups.list();
+```
+
 ## Sample Code For TypeScript / サンプルコード
 
 ```typescript
@@ -111,6 +144,9 @@ import { HttpStatus } from 'node-docbase-sdk/lib/enums/HttpStatus';
 import { MemoCondition } from 'node-docbase-sdk/lib/conditions/MemoCondition';
 import { Memo } from 'node-docbase-sdk/lib/entities/Memo';
 import { DisclosureScopes } from 'node-docbase-sdk/lib/enums/DisclosureScopes';
+import { Comment } from 'node-docbase-sdk/lib/entities/Comment';
+import { Team } from 'node-docbase-sdk/lib/entities/Team';
+import { Group } from 'node-docbase-sdk/lib/entities/Group';
 
 // Get DocBaseAPI Token from cli.
 // ex.
@@ -121,23 +157,69 @@ const KEYWORD = 'DOCBASE_API_TEST';
 
 const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
 
+// コメント削除API
+// @see https://help.docbase.io/posts/216290
+async function deleteComment(entity: Comment) {
+  console.log('== START deleteComment ==');
+  const response: DocBaseResponse = await docBase.comments(entity.memo_id).delete(entity.id);
+  console.log(`=== response: deleteComment===`);
+  console.log(response);
+  console.log(`======`);
+  if (response.status === HttpStatus.OK) {
+    return response.body;
+  }
+  throw new Error(response.body);
+}
+
+// コメント投稿API
+// @see https://help.docbase.io/posts/216289
+async function postComment(memoId: number) {
+  console.log('== START postComment ==');
+  const entity: Comment = <Comment>{};
+  entity.memo_id = memoId;
+  entity.body = COMMENT;
+  entity.notice = false;
+  const response: DocBaseResponse = await docBase.comments(memoId).create(entity);
+  console.log(`=== response: postComment===`);
+  console.log(response);
+  console.log(`======`);
+  if (response.status === HttpStatus.OK) {
+    return response.body;
+  }
+  throw new Error(response.body);
+}
+
+// グループ取得API
+// @see https://help.docbase.io/posts/92978
+async function getGroups() {
+  console.log('== START getGroups ==');
+  const response: DocBaseResponse = await docBase.groups.list();
+  console.log(`=== response: getGroups===`);
+  console.log(response);
+  console.log(`======`);
+  if (response.status === HttpStatus.OK) {
+    return response.body;
+  }
+  throw new Error(response.body);
+}
+
 // 所属チーム取得API
 // @see https://help.docbase.io/posts/92977
-async function getMyTeams() {
+async function getMyTeams(): Promise<Team[]> {
   console.log('== START getMyTeams ==');
-  const reponse: DocBaseResponse = await docBase.teams.list();
-  console.log(`=== Reponse: getMyTeams===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.teams.list();
+  console.log(`=== response: getMyTeams===`);
+  console.log(response);
   console.log(`======`);
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return response.body;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 // メモ投稿API
 // @see https://help.docbase.io/posts/92980
-async function createMemo() {
+async function createMemo(): Promise<Memo> {
   console.log('== START createMemo ==');
   const memo: Memo = <Memo>{};
   memo.title = KEYWORD;
@@ -145,19 +227,19 @@ async function createMemo() {
   memo.draft = false;
   memo.notice = false;
   memo.scope = DisclosureScopes.PRIVATE;
-  const reponse: DocBaseResponse = await docBase.memos.create(memo);
-  console.log(`=== Reponse: createMemo===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.memos.create(memo);
+  console.log(`=== response: createMemo===`);
+  console.log(response);
   console.log(`======`);
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return response.body;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 // メモ更新API
 // @see https://help.docbase.io/posts/92981
-async function updateMemo(memoId: number) {
+async function updateMemo(memoId: number): Promise<Memo> {
   console.log('== START updateMemo ==');
   const memo: Memo = <Memo>{};
   memo.id = memoId;
@@ -166,75 +248,78 @@ async function updateMemo(memoId: number) {
   memo.draft = false;
   memo.notice = false;
   memo.scope = DisclosureScopes.PRIVATE;
-  const reponse: DocBaseResponse = await docBase.memos.update(memo);
-  console.log(`=== Reponse: updateMemo===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.memos.update(memo);
+  console.log(`=== response: updateMemo===`);
+  console.log(response);
   console.log(`======`);
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return response.body;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 // メモ詳細取得API
 // @see https://help.docbase.io/posts/97204
-async function findMemo(memoId: number) {
+async function findMemo(memoId: number): Promise<Memo> {
   console.log('== START findMemo ==');
-  const reponse: DocBaseResponse = await docBase.memos.find(memoId);
-  console.log(`=== Reponse: findMemo ===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.memos.find(memoId);
+  console.log(`=== response: findMemo ===`);
+  console.log(response);
   console.log('======');
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return response.body;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 // 複数メモ取得API
 // @see https://help.docbase.io/posts/92984
-async function searchMemos(keyword: string) {
+async function searchMemos(keyword: string): Promise<Memo[]> {
   console.log('== START searchMemos ==');
   const condition: MemoCondition = <MemoCondition>{};
   condition.q = keyword;
   condition.page = 1;
   condition.perPage = 20;
-  const reponse: DocBaseResponse = await docBase.memos.list(condition);
-  console.log(`=== Reponse: searchMemos===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.memos.list(condition);
+  console.log(`=== response: searchMemos===`);
+  console.log(response);
   console.log(`======`);
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return response.body.posts;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 // メモ削除API
 // @see https://help.docbase.io/posts/92982
-async function deleteMemo(memoId: number) {
+async function deleteMemo(memoId: number): Promise<boolean> {
   console.log('== START deleteMemo ==');
-  const reponse: DocBaseResponse = await docBase.memos.delete(memoId);
-  console.log(`=== Reponse: deleteMemo===`);
-  console.log(reponse);
+  const response: DocBaseResponse = await docBase.memos.delete(memoId);
+  console.log(`=== response: deleteMemo===`);
+  console.log(response);
   console.log(`======`);
-  if (reponse.status === HttpStatus.OK) {
-    return reponse.body;
+  if (response.status === HttpStatus.OK) {
+    return true;
   }
-  throw new Error(reponse.body);
+  throw new Error(response.body);
 }
 
 async function main() {
   try {
-    let resBody = await getMyTeams();
-    resBody = await createMemo();
-    resBody = await updateMemo(Number(resBody.id));
-    resBody = await findMemo(Number(resBody.id));
-    resBody = await searchMemos(String(resBody.title));
-    for (const post of resBody.posts) {
-      if (post.title === 'DOCBASE_API_TEST_updated') {
-        console.log(JSON.stringify(post));
-        await deleteMemo(post.id);
+    const teams: Team[] = await getMyTeams();
+    const groups: Group[] = await getGroups();
+    const createdMemo: Memo = await createMemo();
+    const updatedMemo: Memo = await updateMemo(createdMemo.id);
+    const memoDetail: Memo = await findMemo(updatedMemo.id);
+    const memoList: Memo[] = await searchMemos(memoDetail.title);
+    for (const memo of memoList) {
+      if (memo.title === 'DOCBASE_API_TEST_updated') {
+        console.log(JSON.stringify(memo));
+        const comment: Comment = await postComment(memo.id);
+        await deleteComment(comment);
+        await deleteMemo(memo.id);
       } else {
-        throw new Error(JSON.stringify(post));
+        throw new Error(JSON.stringify(memo));
       }
     }
   } catch (error) {
