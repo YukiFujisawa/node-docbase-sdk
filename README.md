@@ -141,6 +141,19 @@ https://help.docbase.io/posts/92979
   const response: DocBaseResponse = await docBase.tags.list();
 ```
 
+### File upload  / ファイルアップロード
+
+https://help.docbase.io/posts/92979
+
+```typescript
+  const file: File = <File>{};
+  file.file_path = '/Users/yfujisawa/Desktop/etc.txt'; 
+  const splitPath: string[] = filePath.split('/');
+  const fileName = splitPath[splitPath.length - 1];
+  file.name = fileName;
+  const response: DocBaseResponse = await docBase.files.create(file);
+```
+
 ## Sample Code For TypeScript / サンプルコード
 
 ```typescript
@@ -153,6 +166,7 @@ import { DisclosureScopes } from 'node-docbase-sdk/lib/enums/DisclosureScopes';
 import { Comment } from 'node-docbase-sdk/lib/entities/Comment';
 import { Team } from 'node-docbase-sdk/lib/entities/Team';
 import { Group } from 'node-docbase-sdk/lib/entities/Group';
+import { File } from 'node-docbase-sdk/entities/File';
 
 // Get DocBaseAPI Token from cli.
 // ex.
