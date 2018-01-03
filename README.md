@@ -125,7 +125,7 @@ https://help.docbase.io/posts/216290
   const response: DocBaseResponse = await docBase.comments(memoId).delete(id);
 ```
 
-### Groups list  / グループ取得
+### Group list  / グループ取得
 
 https://help.docbase.io/posts/92978
 
