@@ -2,10 +2,10 @@ import { DocBaseEntity } from '../entities/DocBaseEntity';
 export declare namespace MemoConditionFields {
     type q = string;
     type page = number;
-    type perPage = number;
+    type per_page = number;
 }
 export interface MemoCondition extends DocBaseEntity {
     q: MemoConditionFields.q;
     page: MemoConditionFields.page;
-    perPage: MemoConditionFields.perPage;
+    per_page: MemoConditionFields.per_page;
 }
