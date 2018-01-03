@@ -3,6 +3,7 @@ import { HttpStatus } from './enums/HttpStatus';
 import * as request from 'request-promise';
 import { DocBaseResponse } from './DocBaseResponse';
 import { HttpStatusCodes } from './enums/HttpStatusCodes';
+import * as fs from 'fs';
 
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
@@ -81,5 +82,20 @@ export class ApiUtil {
       apiRes.statusCode = error.statusCode;
     }
     return apiRes;
+  }
+
+  static async checkUploadFile(filePath: string) {
+    try {
+      const status: fs.Stats = fs.statSync(filePath);
+      if (status.isFile()) {
+        return true;
+      }
+      if (status.isDirectory()) {
+        throw new Error(`${filePath} is Directory. You can only upload file.`);
+      }
+      throw new Error(`You can only upload file. ${filePath}`);
+    } catch (err) {
+      throw err;
+    }
   }
 }

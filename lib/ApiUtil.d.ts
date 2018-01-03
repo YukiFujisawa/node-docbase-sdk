@@ -17,4 +17,5 @@ export declare class ApiUtil {
      * @returns {Promise<DocBaseResponse>}
      */
     static sendRequest(apiToken: string, reqMethod: RequestMethods, reqUrl: string, content?: any): Promise<DocBaseResponse>;
+    static checkUploadFile(filePath: string): Promise<boolean>;
 }

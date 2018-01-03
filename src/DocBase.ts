@@ -3,6 +3,7 @@ import { Teams } from './resources/Teams';
 import { Groups } from './resources/Groups';
 import { Comments } from './resources/Comments';
 import { Tags } from './resources/Tags';
+import { Files } from './resources/Files';
 
 export class DocBase {
 
@@ -23,6 +24,10 @@ export class DocBase {
 
   get tags(): Tags {
     return new Tags(this.apiToken, this.domain);
+  }
+
+  get files(): Files {
+    return new Files(this.apiToken, this.domain);
   }
 
   comments(memoId: number): Comments {

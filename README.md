@@ -94,7 +94,7 @@ https://help.docbase.io/posts/92982
   const reponse: DocBaseResponse = await docBase.memos.delete(id);
 ```
 
-### My team get / 所属チーム取得
+### My team list / 所属チーム取得
 
 https://help.docbase.io/posts/92977
 
@@ -125,14 +125,20 @@ https://help.docbase.io/posts/216290
   const response: DocBaseResponse = await docBase.comments(memoId).delete(id);
 ```
 
-### Get groups / グループ取得
+### Groups list  / グループ取得
 
 https://help.docbase.io/posts/92978
 
 ```typescript
-  const id = 1;
-  const memoId = 1;
   const response: DocBaseResponse = await docBase.groups.list();
+```
+
+### Tag list  / タグ取得
+
+https://help.docbase.io/posts/92979
+
+```typescript
+  const response: DocBaseResponse = await docBase.tags.list();
 ```
 
 ## Sample Code For TypeScript / サンプルコード
@@ -158,7 +164,7 @@ const KEYWORD = 'DOCBASE_API_TEST';
 const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
 
 // コメント削除API
-// @see https://help.docbase.io/posts/216290
+// @see https://help.docbase.io/posts/216289
 async function deleteComment(entity: Comment) {
   console.log('== START deleteComment ==');
   const response: DocBaseResponse = await docBase.comments(entity.memo_id).delete(entity.id);
@@ -196,6 +202,40 @@ async function getGroups() {
   const response: DocBaseResponse = await docBase.groups.list();
   console.log(`=== response: getGroups===`);
   console.log(response);
+  console.log(`======`);
+  if (response.status === HttpStatus.OK) {
+    return response.body;
+  }
+  throw new Error(response.body);
+}
+
+// タグの取得API
+// @see https://help.docbase.io/posts/92979
+async function getTags() {
+  console.log('== START getTags ==');
+  const response: DocBaseResponse = await docBase.tags.list();
+  console.log(`=== response: getTags===`);
+  console.log(response);
+  console.log(`======`);
+  if (response.status === HttpStatus.OK) {
+    return response.body;
+  }
+  throw new Error(response.body);
+}
+
+// ファイルアップロードAPI
+// @see https://help.docbase.io/posts/45703
+async function uploadFile(filePath: string) {
+  console.log('== START uploadFile ==');
+  const file: File = <File>{};
+  file.file_path = filePath;
+  const splitPath: string[] = filePath.split('/');
+  const fileName = splitPath[splitPath.length - 1];
+  console.log('fileName::' + fileName);
+  file.name = fileName;
+  const response: DocBaseResponse = await docBase.files.create(file);
+  console.log(`=== response: uploadFile===`);
+  console.log(response.body);
   console.log(`======`);
   if (response.status === HttpStatus.OK) {
     return response.body;
@@ -279,7 +319,7 @@ async function searchMemos(keyword: string): Promise<Memo[]> {
   const condition: MemoCondition = <MemoCondition>{};
   condition.q = keyword;
   condition.page = 1;
-  condition.perPage = 20;
+  condition.per_page = 20;
   const response: DocBaseResponse = await docBase.memos.list(condition);
   console.log(`=== response: searchMemos===`);
   console.log(response);
@@ -308,6 +348,7 @@ async function main() {
   try {
     const teams: Team[] = await getMyTeams();
     const groups: Group[] = await getGroups();
+    const tags: Tag[] = await getTags();
     const createdMemo: Memo = await createMemo();
     const updatedMemo: Memo = await updateMemo(createdMemo.id);
     const memoDetail: Memo = await findMemo(updatedMemo.id);
