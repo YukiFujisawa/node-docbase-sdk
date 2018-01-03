@@ -2,6 +2,7 @@ import { IResources } from './IResources';
 import { DocBaseResponse } from '../DocBaseResponse';
 import { RequestMethods } from '../enums/RequestMethods';
 import { ApiUtil } from '../ApiUtil';
+import { HttpStatus } from '../enums/HttpStatus';
 
 export class ResourcesBase<ENTITY> implements IResources<ENTITY> {
 
@@ -28,21 +29,40 @@ export class ResourcesBase<ENTITY> implements IResources<ENTITY> {
 
   async find(id: number): Promise<DocBaseResponse> {
     const uri: string = this.baseUri + `/${id}`;
-    return await this.sendRequest(RequestMethods.GET, uri);
+    const response: DocBaseResponse = await this.sendRequest(RequestMethods.GET, uri);
+    if (response.status === HttpStatus.OK && response.body) {
+      response.body.domain = this.domain;
+    }
+    return response;
   }
 
   async list(condition: any = null): Promise<DocBaseResponse> {
-    return await this.sendRequest(RequestMethods.GET, this.baseUri, condition);
+    const response: DocBaseResponse =
+      await this.sendRequest(RequestMethods.GET, this.baseUri, condition);
+    if (response.status === HttpStatus.OK && response.body) {
+      response.body.domain = this.domain;
+    }
+    return response;
   }
 
   async update(entity: ENTITY): Promise<DocBaseResponse> {
     const obj: any = entity;
     const uri: string = this.baseUri + `/${obj.id}`;
-    return await this.sendRequest(RequestMethods.PATCH, uri, {}, obj);
+    const response: DocBaseResponse =
+      await this.sendRequest(RequestMethods.PATCH, uri, {}, obj);
+    if (response.status === HttpStatus.OK && response.body) {
+      response.body.domain = this.domain;
+    }
+    return response;
   }
 
   async create(entity: ENTITY): Promise<DocBaseResponse> {
-    return await this.sendRequest(RequestMethods.POST, this.baseUri, {}, entity);
+    const response: DocBaseResponse =
+      await this.sendRequest(RequestMethods.POST, this.baseUri, {}, entity);
+    if (response.status === HttpStatus.OK && response.body) {
+      response.body.domain = this.domain;
+    }
+    return response;
   }
 
   async delete(id: number): Promise<DocBaseResponse> {

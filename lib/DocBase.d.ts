@@ -2,6 +2,7 @@ import { Memos } from './resources/Memos';
 import { Teams } from './resources/Teams';
 import { Groups } from './resources/Groups';
 import { Comments } from './resources/Comments';
+import { Tags } from './resources/Tags';
 export declare class DocBase {
     private apiToken;
     private domain;
@@ -9,5 +10,6 @@ export declare class DocBase {
     readonly memos: Memos;
     readonly teams: Teams;
     readonly groups: Groups;
+    readonly tags: Tags;
     comments(memoId: number): Comments;
 }

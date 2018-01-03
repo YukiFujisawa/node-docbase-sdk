@@ -2,6 +2,7 @@ import { Memos } from './resources/Memos';
 import { Teams } from './resources/Teams';
 import { Groups } from './resources/Groups';
 import { Comments } from './resources/Comments';
+import { Tags } from './resources/Tags';
 
 export class DocBase {
 
@@ -18,6 +19,10 @@ export class DocBase {
 
   get groups(): Groups {
     return new Groups(this.apiToken, this.domain);
+  }
+
+  get tags(): Tags {
+    return new Tags(this.apiToken, this.domain);
   }
 
   comments(memoId: number): Comments {
