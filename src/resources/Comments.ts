@@ -8,9 +8,9 @@ export class Comments extends ResourcesBase<Comment> {
 
   private pMemoId: number = 0;
 
-  constructor(apiToken: string, team: string, memoId: number) {
-    super(apiToken, team);
-    this.baseUri = `/teams/${super.team}/posts/${memoId}/comments`;
+  constructor(apiToken: string, domain: string, memoId: number) {
+    super(apiToken, domain);
+    this.baseUri = `/teams/${super.domain}/posts/${memoId}/comments`;
   }
 
   /**
@@ -31,7 +31,7 @@ export class Comments extends ResourcesBase<Comment> {
   }
 
   async delete(id: number): Promise<DocBaseResponse> {
-    const uri: string = `/teams/${super.team}/comments/${id}`;
+    const uri: string = `/teams/${super.domain}/comments/${id}`;
     return await this.sendRequest(RequestMethods.DELETE, uri);
   }
 }

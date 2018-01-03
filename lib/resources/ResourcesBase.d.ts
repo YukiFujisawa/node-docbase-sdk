@@ -3,10 +3,10 @@ import { DocBaseResponse } from '../DocBaseResponse';
 import { RequestMethods } from '../enums/RequestMethods';
 export declare class ResourcesBase<ENTITY> implements IResources<ENTITY> {
     private pApiToken;
-    private pTeam;
+    private pDomain;
     private pBaseUri;
-    constructor(pApiToken: string, pTeam?: string);
-    readonly team: string;
+    constructor(pApiToken: string, pDomain?: string);
+    readonly domain: string;
     baseUri: string;
     readonly apiToken: string;
     find(id: number): Promise<DocBaseResponse>;

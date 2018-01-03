@@ -7,7 +7,7 @@ import { HttpStatusCodes } from './enums/HttpStatusCodes';
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
 const TIMEOUT: number = 60000;
-const EX_KEYS = ['team'];
+const EX_KEYS = ['domain'];
 
 export class ApiUtil {
   /**

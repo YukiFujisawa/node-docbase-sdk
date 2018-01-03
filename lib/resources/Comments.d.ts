@@ -3,7 +3,7 @@ import { ResourcesBase } from './ResourcesBase';
 import { Comment } from '../entities/Comment';
 export declare class Comments extends ResourcesBase<Comment> {
     private pMemoId;
-    constructor(apiToken: string, team: string, memoId: number);
+    constructor(apiToken: string, domain: string, memoId: number);
     /**
      * Create
      * @param {Comment} entity

@@ -5,11 +5,11 @@ import { Comments } from './resources/Comments';
 
 export class DocBase {
 
-  constructor(private apiToken: string, private team: string = '') {
+  constructor(private apiToken: string, private domain: string = '') {
   }
 
   get memos(): Memos {
-    return new Memos(this.apiToken, this.team);
+    return new Memos(this.apiToken, this.domain);
   }
 
   get teams(): Teams {
@@ -17,10 +17,10 @@ export class DocBase {
   }
 
   get groups(): Groups {
-    return new Groups(this.apiToken, this.team);
+    return new Groups(this.apiToken, this.domain);
   }
 
   comments(memoId: number): Comments {
-    return new Comments(this.apiToken, this.team, memoId);
+    return new Comments(this.apiToken, this.domain, memoId);
   }
 }

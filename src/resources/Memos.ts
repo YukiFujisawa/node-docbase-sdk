@@ -5,9 +5,9 @@ import { ResourcesBase } from './ResourcesBase';
 
 export class Memos extends ResourcesBase<Memo> {
 
-  constructor(apiToken: string, team: string) {
-    super(apiToken, team);
-    this.baseUri = `/teams/${team}/posts`;
+  constructor(apiToken: string, domain: string) {
+    super(apiToken, domain);
+    this.baseUri = `/teams/${domain}/posts`;
   }
 
   /**

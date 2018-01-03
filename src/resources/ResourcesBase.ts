@@ -7,11 +7,11 @@ export class ResourcesBase<ENTITY> implements IResources<ENTITY> {
 
   private pBaseUri: string;
 
-  constructor(private pApiToken: string, private pTeam: string = '') {
+  constructor(private pApiToken: string, private pDomain: string = '') {
   }
 
-  get team(): string {
-    return this.pTeam;
+  get domain(): string {
+    return this.pDomain;
   }
 
   get baseUri(): string {

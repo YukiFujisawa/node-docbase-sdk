@@ -2,7 +2,7 @@ import { DocBaseResponse } from '../DocBaseResponse';
 import { Memo } from '../entities/Memo';
 import { ResourcesBase } from './ResourcesBase';
 export declare class Memos extends ResourcesBase<Memo> {
-    constructor(apiToken: string, team: string);
+    constructor(apiToken: string, domain: string);
     /**
      * Update
      * @param {Memo} entity
