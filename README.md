@@ -143,7 +143,7 @@ https://help.docbase.io/posts/92979
 
 ### File upload  / ファイルアップロード
 
-https://help.docbase.io/posts/92979
+https://help.docbase.io/posts/225804
 
 ```typescript
   const file: File = <File>{};
@@ -178,7 +178,7 @@ const KEYWORD = 'DOCBASE_API_TEST';
 const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
 
 // コメント削除API
-// @see https://help.docbase.io/posts/216289
+// @see https://help.docbase.io/posts/216290
 async function deleteComment(entity: Comment) {
   console.log('== START deleteComment ==');
   const response: DocBaseResponse = await docBase.comments(entity.memo_id).delete(entity.id);
@@ -238,7 +238,7 @@ async function getTags() {
 }
 
 // ファイルアップロードAPI
-// @see https://help.docbase.io/posts/45703
+// @see https://help.docbase.io/posts/225804
 async function uploadFile(filePath: string) {
   console.log('== START uploadFile ==');
   const file: File = <File>{};
