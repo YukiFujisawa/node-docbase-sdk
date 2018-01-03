@@ -166,7 +166,8 @@ import { DisclosureScopes } from 'node-docbase-sdk/lib/enums/DisclosureScopes';
 import { Comment } from 'node-docbase-sdk/lib/entities/Comment';
 import { Team } from 'node-docbase-sdk/lib/entities/Team';
 import { Group } from 'node-docbase-sdk/lib/entities/Group';
-import { File } from 'node-docbase-sdk/entities/File';
+import { File } from 'node-docbase-sdk/lib/entities/File';
+import { Tag } from 'node-docbase-sdk/lib/entities/Tag';
 
 // Get DocBaseAPI Token from cli.
 // ex.
