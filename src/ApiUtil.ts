@@ -27,7 +27,7 @@ export class ApiUtil {
       if (paramStr) {
         paramStr += '&';
       }
-      paramStr += `${key}=${params[key]}`;
+      paramStr += `${key}=${encodeURIComponent(params[key])}`;
     }
 
     url = DOCBASE_API_URL + apiUri;
