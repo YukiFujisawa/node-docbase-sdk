@@ -23,12 +23,9 @@
     "url": "https://github.com/YukiFujisawa/node-docbase-sdk/issues"
   },
   "dependencies": {
-    "@types/bluebird": "3.5.12",
-    "@types/request": "^0.0.45",
-    "@types/request-promise": "^4.1.39",
+    "@types/node": "^9.3.0",
     "del-cli": "^1.1.0",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
+    "phin": "git+https://github.com/YukiFujisawa/phin.git#master",
     "typescript": "^2.6.2"
   },
   "devDependencies": {
