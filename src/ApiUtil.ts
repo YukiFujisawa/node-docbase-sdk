@@ -1,10 +1,9 @@
 import { RequestMethods } from './enums/RequestMethods';
 import { HttpStatus } from './enums/HttpStatus';
-import * as request from 'request-promise';
 import { DocBaseResponse } from './DocBaseResponse';
-import { HttpStatusCodes } from './enums/HttpStatusCodes';
 import * as fs from 'fs';
 
+const phin = require('phin').promisified;
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
 const TIMEOUT: number = 60000;
@@ -50,36 +49,33 @@ export class ApiUtil {
                            reqUrl: string,
                            content: any = ''): Promise<DocBaseResponse> {
     const apiRes: DocBaseResponse = <DocBaseResponse>{};
-    let options: any = {};
     try {
-      options = {
+      const options: any = {
         method: reqMethod,
-        uri: reqUrl,
+        url: reqUrl,
         headers: {
           'X-DocBaseToken': apiToken,
           'content-type': 'application/json',
         },
-        rejectUnauthorized: false,
         timeout: TIMEOUT,
-        json: true,
+        parse: 'json',
       };
       if (content) {
-        options['body'] = content;
+        options['data'] = content;
+      }
+
+      const response: any = await phin(options);
+      apiRes.body = response.body;
+      apiRes.statusCode = response.statusCode;
+      apiRes.options = options;
+
+      if (String(apiRes.statusCode).startsWith('2')) {
+        apiRes.status = HttpStatus.OK;
+      } else {
+        apiRes.status = HttpStatus.NG;
       }
     } catch (error) {
       throw error;
-    }
-    try {
-      const response = await request(options);
-      apiRes.body = response;
-      apiRes.options = options;
-      apiRes.status = HttpStatus.OK;
-      apiRes.statusCode = HttpStatusCodes.OK;
-    } catch (error) {
-      apiRes.body = error.message;
-      apiRes.options = options;
-      apiRes.status = HttpStatus.NG;
-      apiRes.statusCode = error.statusCode;
     }
     return apiRes;
   }
