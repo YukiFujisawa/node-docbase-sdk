@@ -1,0 +1,21 @@
+language: node_js
+before_install:
+- nvm install $NODE
+install:
+- npm install
+- npm install $TYPESCRIPT --force
+notifications:
+  email:
+    recipients:
+    - g031y148yuki@gmail.com
+    on_success: never
+    on_failure: change
+script:
+- DOC_BASE_API_TOKEN=$DOC_BASE_API_TOKEN npm run start
+env:
+  global:
+  - secure: BZ8REjdZTLmO9v9OG+W9NmlfbvsbzycCuKV4VJaInAp6f+CgWNZAhr1jMNOjl0lj6yxAH9iTiRk579plISTPwA0c6OEc03UU0KcTeaYOzUUIWgYBfMaL1sJ2Wctz9LGYFYMThs/kphlF+4lczrWNJhK+HlTKoTjFydaoxBTuQylqD46igLuTpQAhNzQh6wEUQaYXMrFfJTDhwEXq90Rvhb9vMszR8keoPD89irq/dr1ox8V6cbMwtoaTMqj4jO44egs6kkGD+nghy9yc4bafXCKBs+7ouqeL1MPEcd0BHxBp3k7N/VA9c4SKrqRvqDIaBAjUZjldDlycQwreDcwMgUEw4VWlSLL1XJhnMBmhTTUdZPrimgQjl2XjI9hmLPYt5xTQukCLShAZXNo63Kb6+cGtnJCvijNsBesfcS1fTOn7yXOEl+fSGTc8rAuis1hbepzSe9xu0/e5A7+P7KqfqpgmjewMC2x1vLJx3gppDy6uK+/MRC5RFb/xLwuRcR6dc+7QW/QuNCMeaNGXi2NvM1W0zzNpBjn+j4GCKYIhZlP7CLnkiFwap4+bUn5GQuzeiDqCjEpLOXm6B0u/iYatlaMzVA33q24EoZyf7COY0AEK/Smp386rYFf/YM6EFsH/Bv5/wLUKV3oRC/rqexZ7pgqz+qVYJWh5TKIhGuYa+Nk=
+  matrix:
+  - NODE=8 TYPESCRIPT=typescript@latest
+node_js:
+- stable
