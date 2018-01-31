@@ -2,8 +2,8 @@ import { RequestMethods } from './enums/RequestMethods';
 import { HttpStatus } from './enums/HttpStatus';
 import { DocBaseResponse } from './DocBaseResponse';
 import * as fs from 'fs';
+import * as Snekfetch from 'snekfetch';
 
-const phin = require('phin').promisified;
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
 const TIMEOUT: number = 60000;
@@ -50,26 +50,26 @@ export class ApiUtil {
                            content: any = ''): Promise<DocBaseResponse> {
     const apiRes: DocBaseResponse = <DocBaseResponse>{};
     try {
-      const options: any = {
-        method: reqMethod,
-        url: reqUrl,
-        headers: {
-          'X-DocBaseToken': apiToken,
-          'content-type': 'application/json',
-        },
-        timeout: TIMEOUT,
-        parse: 'json',
+      const options: Snekfetch.SnekfetchOptions = <Snekfetch.SnekfetchOptions>{};
+      options.headers = {
+        'X-DocBaseToken': apiToken,
+        'content-type': 'application/json',
       };
+
+      const snekfetch: Snekfetch = new Snekfetch(reqMethod, reqUrl, options);
+
       if (content) {
-        options['data'] = content;
+        options.data = content;
       }
 
-      const response: any = await phin(options);
-      apiRes.body = response.body;
-      apiRes.statusCode = response.statusCode;
-      apiRes.options = options;
+      const response: Snekfetch.Result = await snekfetch.send(content);
 
-      if (String(apiRes.statusCode).startsWith('2')) {
+      apiRes.body = response.body;
+      apiRes.statusCode = response.status;
+      apiRes.options = options;
+      apiRes.statusText = response.statusText;
+
+      if (response.ok) {
         apiRes.status = HttpStatus.OK;
       } else {
         apiRes.status = HttpStatus.NG;
