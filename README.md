@@ -1,6 +1,7 @@
 # node-docbase-sdk 
 
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/YukiFujisawa/node-docbase-sdk.svg)](https://beta.gemnasium.com/projects/github.com/YukiFujisawa/node-docbase-sdk)
+[![Build Status](https://travis-ci.org/YukiFujisawa/node-docbase-sdk.svg?branch=master)](https://travis-ci.org/YukiFujisawa/node-docbase-sdk)
 
 ## Overview
 
