@@ -6,5 +6,5 @@ export declare enum HttpStatus {
     /**
      *  POST
      */
-    NG = "NG",
+    NG = "NG"
 }

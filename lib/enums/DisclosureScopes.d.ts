@@ -10,5 +10,5 @@ export declare enum DisclosureScopes {
     /**
      * PRIVATE
      */
-    PRIVATE = "private",
+    PRIVATE = "private"
 }

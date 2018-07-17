@@ -14,5 +14,5 @@ export declare enum RequestMethods {
     /**
      * DELETE
      */
-    DELETE = "DELETE",
+    DELETE = "DELETE"
 }
