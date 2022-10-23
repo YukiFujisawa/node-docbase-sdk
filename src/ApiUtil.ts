@@ -6,7 +6,6 @@ import * as fs from 'fs';
 import * as Snekfetch from 'snekfetch';
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
-const TIMEOUT: number = 60000;
 const EX_KEYS = ['domain'];
 
 export class ApiUtil {
@@ -20,17 +19,17 @@ export class ApiUtil {
     let paramStr: string = '';
     let url: string;
     for (const key in params) {
-      if (EX_KEYS.indexOf(key) > -1) {
+      if (EX_KEYS.includes(key)) {
         continue;
       }
-      if (paramStr) {
+      if (paramStr.length > 0) {
         paramStr += '&';
       }
       paramStr += `${key}=${encodeURIComponent(params[key])}`;
     }
 
     url = DOCBASE_API_URL + apiUri;
-    if (paramStr) {
+    if (paramStr.length > 0) {
       url += '?' + paramStr;
     }
     return url;

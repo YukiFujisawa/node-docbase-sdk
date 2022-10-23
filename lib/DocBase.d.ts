@@ -5,8 +5,8 @@ import { Comments } from './resources/Comments';
 import { Tags } from './resources/Tags';
 import { Files } from './resources/Files';
 export declare class DocBase {
-    private apiToken;
-    private domain;
+    private readonly apiToken;
+    private readonly domain;
     constructor(apiToken: string, domain?: string);
     get memos(): Memos;
     get teams(): Teams;

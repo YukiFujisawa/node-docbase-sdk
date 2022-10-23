@@ -1,6 +1,4 @@
 {
-  "tslint.configFile": "tslint.json",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true
-  }
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // フォーマッターをPrettierにする
+  "editor.formatOnSave": true // ファイル保存時にフォーマットを実行
 }
