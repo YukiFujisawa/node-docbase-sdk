@@ -1,9 +1,20 @@
 {
-  "extends": [
-    "tslint-config-airbnb"
-  ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
-    "ter-arrow-parens": false,
-    "max-line-length": [true, 120]
+    "prettier": [
+      true,
+      {
+        "printWidth": 140,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "ordered-imports": false
+      }
+    ]
   }
 }

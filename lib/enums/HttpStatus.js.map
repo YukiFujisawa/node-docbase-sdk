@@ -1,1 +1,1 @@
-{"version":3,"file":"HttpStatus.js","sourceRoot":"","sources":["../../src/enums/HttpStatus.ts"],"names":[],"mappings":";;AAAA,IAAY,UASX;AATD,WAAY,UAAU;IACpB;;OAEG;IACH,uBAAS,CAAA;IACT;;OAEG;IACH,uBAAS,CAAA;AACX,CAAC,EATW,UAAU,GAAV,kBAAU,KAAV,kBAAU,QASrB"}
+{"version":3,"file":"HttpStatus.js","sourceRoot":"","sources":["../../src/enums/HttpStatus.ts"],"names":[],"mappings":";;;AAAA,IAAY,UASX;AATD,WAAY,UAAU;IACpB;;OAEG;IACH,uBAAS,CAAA;IACT;;OAEG;IACH,uBAAS,CAAA;AACX,CAAC,EATW,UAAU,GAAV,kBAAU,KAAV,kBAAU,QASrB"}

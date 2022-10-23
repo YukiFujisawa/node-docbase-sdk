@@ -1,11 +1,11 @@
 {
   "name": "node-docbase-sdk",
-  "version": "0.6.1",
+  "version": "0.6.3",
   "description": "DocBase(https://docbase.io/) Api Library for TypeScript.",
   "main": "lib/index.js",
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
-    "compile": "del-cli lib/* && tsc -p . && npm run lint",
+    "compile": "del-cli lib/* && tsc -p .",
     "start": "del-cli lib/* && tsc -p . && node ."
   },
   "repository": {
@@ -23,15 +23,17 @@
     "url": "https://github.com/YukiFujisawa/node-docbase-sdk/issues"
   },
   "dependencies": {
-    "@types/snekfetch": "^3.6.0",
-    "del-cli": "^5.0.0",
-    "snekfetch": "^3.6.4",
-    "typescript": "^2.9.2"
-  },
-  "devDependencies": {
     "@types/node": "^18.11.3",
-    "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.9.2"
+    "@types/snekfetch": "^4.0.4",
+    "del-cli": "^5.0.0",
+    "snekfetch": "^4.0.4",
+    "tslint": "^5.20.1",
+    "typescript": "^4.8.4"
   },
-  "homepage": "https://github.com/YukiFujisawa/node-docbase-sdk#readme"
+  "homepage": "https://github.com/YukiFujisawa/node-docbase-sdk#readme",
+  "devDependencies": {
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.3.0"
+  }
 }

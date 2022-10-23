@@ -8,10 +8,10 @@ export declare class DocBase {
     private apiToken;
     private domain;
     constructor(apiToken: string, domain?: string);
-    readonly memos: Memos;
-    readonly teams: Teams;
-    readonly groups: Groups;
-    readonly tags: Tags;
-    readonly files: Files;
+    get memos(): Memos;
+    get teams(): Teams;
+    get groups(): Groups;
+    get tags(): Tags;
+    get files(): Files;
     comments(memoId: number): Comments;
 }

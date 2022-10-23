@@ -1,9 +1,9 @@
-import { RequestMethods } from './enums/RequestMethods';
-import { HttpStatus } from './enums/HttpStatus';
 import { DocBaseResponse } from './DocBaseResponse';
+import { HttpStatus } from './enums/HttpStatus';
+import { RequestMethods } from './enums/RequestMethods';
+
 import * as fs from 'fs';
 import * as Snekfetch from 'snekfetch';
-
 
 const DOCBASE_API_URL: string = 'https://api.docbase.io';
 const TIMEOUT: number = 60000;
@@ -16,7 +16,7 @@ export class ApiUtil {
    * @param params
    * @returns {Promise<string>}
    */
-  static async getApiUrl(apiUri: string, params: any) {
+  public static async getApiUrl(apiUri: string, params: any) {
     let paramStr: string = '';
     let url: string;
     for (const key in params) {
@@ -44,10 +44,12 @@ export class ApiUtil {
    * @param content
    * @returns {Promise<DocBaseResponse>}
    */
-  static async sendRequest(apiToken: string,
-                           reqMethod: RequestMethods,
-                           reqUrl: string,
-                           content: any = ''): Promise<DocBaseResponse> {
+  public static async sendRequest(
+    apiToken: string,
+    reqMethod: RequestMethods,
+    reqUrl: string,
+    content: any = ''
+  ): Promise<DocBaseResponse> {
     const apiRes: DocBaseResponse = <DocBaseResponse>{};
     try {
       const options: Snekfetch.SnekfetchOptions = <Snekfetch.SnekfetchOptions>{};
@@ -61,8 +63,7 @@ export class ApiUtil {
       if (content) {
         options.data = content;
       }
-
-      const response: Snekfetch.Result = await snekfetch.send(content);
+      const response: Snekfetch.SnekfetchResponse = await snekfetch.send(content);
 
       apiRes.body = response.body;
       apiRes.statusCode = response.status;

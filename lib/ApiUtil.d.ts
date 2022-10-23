@@ -1,5 +1,5 @@
-import { RequestMethods } from './enums/RequestMethods';
 import { DocBaseResponse } from './DocBaseResponse';
+import { RequestMethods } from './enums/RequestMethods';
 export declare class ApiUtil {
     /**
      * Get docBase API URL

@@ -14,7 +14,7 @@ import { Tag } from './entities/Tag';
 // ex.
 //   $ DOC_BASE_API_TOKEN=<DOC_BASE_API_TOKEN> node .
 const DOC_BASE_API_TOKEN = process.env.DOC_BASE_API_TOKEN;
-const TEAM_NAME = 'yfujisawa';
+const TEAM_NAME = 'wywy';
 const KEYWORD = 'DOCBASE_API_TEST';
 
 const docBase: DocBase = new DocBase(DOC_BASE_API_TOKEN, TEAM_NAME);
@@ -202,7 +202,6 @@ async function deleteMemo(memoId: number): Promise<boolean> {
 
 async function main() {
   try {
-    const teams: Team[] = await getMyTeams();
     const groups: Group[] = await getGroups();
     const tags: Tag[] = await getTags();
     const createdMemo: Memo = await createMemo();
