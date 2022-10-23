@@ -6,9 +6,10 @@ export declare class ResourcesBase<ENTITY> implements IResources<ENTITY> {
     private pDomain;
     private pBaseUri;
     constructor(pApiToken: string, pDomain?: string);
-    readonly domain: string;
-    baseUri: string;
-    readonly apiToken: string;
+    get domain(): string;
+    get baseUri(): string;
+    set baseUri(pBaseUri: string);
+    get apiToken(): string;
     find(id: number): Promise<DocBaseResponse>;
     list(condition?: any): Promise<DocBaseResponse>;
     update(entity: ENTITY): Promise<DocBaseResponse>;

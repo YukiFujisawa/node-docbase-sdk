@@ -5,13 +5,13 @@ import { Comments } from './resources/Comments';
 import { Tags } from './resources/Tags';
 import { Files } from './resources/Files';
 export declare class DocBase {
-    private apiToken;
-    private domain;
+    private readonly apiToken;
+    private readonly domain;
     constructor(apiToken: string, domain?: string);
-    readonly memos: Memos;
-    readonly teams: Teams;
-    readonly groups: Groups;
-    readonly tags: Tags;
-    readonly files: Files;
+    get memos(): Memos;
+    get teams(): Teams;
+    get groups(): Groups;
+    get tags(): Tags;
+    get files(): Files;
     comments(memoId: number): Comments;
 }

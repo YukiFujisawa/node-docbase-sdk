@@ -6,9 +6,7 @@ import { Tags } from './resources/Tags';
 import { Files } from './resources/Files';
 
 export class DocBase {
-
-  constructor(private apiToken: string, private domain: string = '') {
-  }
+  constructor(private readonly apiToken: string, private readonly domain: string = '') {}
 
   get memos(): Memos {
     return new Memos(this.apiToken, this.domain);
